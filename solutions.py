@@ -34,3 +34,20 @@ print(set_a, set_b)
 set_c = set(set_a) # how to copy a set
 set_c.update(set_b) # how to add all elements from one set into another
 print(set_c)
+
+
+# 15 (1.7)
+# Given a list of items, return whether all items in the list are unique
+
+def all_unique(items):
+    prev = set()
+    for item in items:
+        if item in prev:
+            return False
+        prev.add(item)
+
+    return True
+
+def all_unique(items):
+    items_set = set(items)
+    return len(items) == len(items_set)
