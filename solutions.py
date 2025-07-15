@@ -454,3 +454,30 @@ def sum_list(head):
         return 0 
 
     return head.val + sum_list(head.next)
+
+
+
+
+#* 23 
+''' Given the head of a linked list and a target,
+    Return whether the linked list contains the target '''
+
+# ITERATIVE
+def linked_list_find(head, target):
+    curr = head
+    while curr is not None:
+        if curr.val == target:
+            return True 
+        curr = curr.next
+
+    return False 
+
+# RECURSIVE 
+def linked_list_find(head, target):
+    if head is None:
+        return False 
+
+    if head.val == target:
+        return True 
+
+    return linked_list_find(head.next, target)
