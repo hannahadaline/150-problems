@@ -1,3 +1,106 @@
+#* 1 (0.1)
+''' Given a string s, return a greeting "Hey s". '''
+
+def greet(s):
+    return "hey " + s
+   
+
+
+
+#* 2 (0.2)
+''' Given a non-empty list of numbers, return the largest number in the list '''
+
+def max_value(nums):
+    max_val = float("-inf")
+  
+    for num in nums:
+        if num > max_val:
+            max_val = num
+
+    return max_val
+
+
+
+#* 3 (0.3)
+''' Given a sentence string, return the longest word in the sentence. 
+   If there are ties, return the later word '''
+
+def longest_word(sentence):
+    words = sentence.split(" ")
+    words.reverse()
+    longest_length = float("-inf")
+    longest_word = ""
+
+    for word in words:
+        if len(word) > longest_length:
+            longest_length = len(word)
+            longest_word = word
+
+    return longest_word
+
+
+
+
+#* 4 (0.4) 
+''' Given a positive integer, return whether it is prime ''' 
+def longest_word(sentence):
+    words = sentence.split(" ")
+    words.reverse()
+    longest_length = float("-inf")
+    longest_word = ""
+
+    for word in words:
+        if len(word) > longest_length:
+            longest_length = len(word)
+            longest_word = word
+
+    return longest_word
+
+
+
+
+#* 5 (0.5)
+''' Given a positive integer n, 
+    Return a list of numbers from 1 to n making the following replacements:
+    - if the number is divisible by 3, make the element "fizz"
+    - if the number is divisible by 5, make the element "buzz"
+    - if the number is divisible by 3 and 5, make the element "fizzbuzz" '''
+
+def fizz_buzz(n):
+    result = []
+   
+    for i in range(1, n + 1):
+        if i % 15 == 0:
+            result.append("fizzbuzz")
+        elif i % 3 == 0:
+            result.append("fizz")
+        elif i % 5 == 0:
+            result.append("buzz")
+        else:
+            result.append(i)
+
+    return result
+
+
+
+
+#* 6 (0.6)
+''' Given a list of unique elements,
+    Return a list of all unique pairs of elements in any order.
+    The order within each pair does not matter. '''
+
+def pairs(elements):
+    pairs = []
+   
+    for i in range(0, len(elements)):
+        for j in range(i + 1, len(elements)):
+            pairs.append([elements[i], elements[j]])
+         
+    return pairs
+      
+
+
+
 #* 7 (1.1)
 ''' Given two strings, return whether the two strings are anagrams
 (containing the same characters but in a different order '''
