@@ -481,3 +481,76 @@ def linked_list_find(head, target):
         return True 
 
     return linked_list_find(head.next, target)
+
+
+
+
+#* 24 (3.4)
+''' Given a head of a linked list and an index,
+    Return the value of the node at the index
+    If there is no node at the index, return None '''
+
+# ITERATIVE
+def get_node_value(head, index):
+    curr_index = 0
+    curr_node = head 
+
+    while curr_node is not None:
+        if curr_index == index:
+            return curr_node.val 
+
+        curr_index += 1
+        curr_node = curr_node.next
+
+    return None
+
+# RECURSIVE
+def get_node_value(head, index):
+    if head is None:
+        return None
+
+    if index == 0:
+        return head.val 
+
+    return get_node_value(head.next, index - 1)
+
+
+
+#* 25 (3.5)
+''' Given the head of a linked list, reverse the linked list and return the new head '''
+
+# ITERATIVE 
+def reverse_list(head):
+    if head is None:
+        return None 
+    if head.next is None:
+        return head 
+        
+    curr = head 
+    prev = None 
+    while curr is not None:
+        next = curr.next # make sure to set this before
+        curr.next = prev 
+        prev = curr 
+        curr = next 
+
+    return prev 
+
+# None <- a   b -> c -> d -> e -> f
+#       prev curr   
+
+
+# RECURSIVE
+
+def reverse_list(head):
+    prev = None 
+    return _reverse_list(head, prev)
+
+def _reverse_list(head, prev):
+    if head is None:
+        return prev # we get this from the last step of the iterative 
+        
+    next = head.next 
+    head.next = prev 
+
+    return _reverse_list(next, head)
