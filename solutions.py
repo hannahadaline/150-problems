@@ -245,3 +245,28 @@ def reverse_string(s):
         return ""
 
     return s[-1] + reverse_string(s[:-1])
+
+
+
+#* 19 (2.5)
+''' Given a string, check if it is a palindrome recursively '''
+
+def palindrome(s):
+    if len(s) == 0 or len(s) == 1:
+        return True 
+
+    return s[0] == s[-1] and palindrome(s[1:-1])
+
+# this is easy to read and intuitive, but not the most efficient:
+# returning False if the outer chars are not equal prevents you from doing more searching inward
+
+# time and space are O(n^2) for all these recursive string problems
+
+def palindrome(s):
+    if len(s) == 0 or len(s) == 1:
+        return True 
+
+    if s[0] != s[-1]:
+        return False
+        
+    return palindrome(s[1:-1])
