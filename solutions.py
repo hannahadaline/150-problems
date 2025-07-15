@@ -270,3 +270,15 @@ def palindrome(s):
         return False
         
     return palindrome(s[1:-1])
+
+
+#* 20 (2.6)
+''' Given a nonnegative integer n, compute the nth Fibonacci number recursively '''
+   
+def fibonacci(n):
+    if n == 0 or n == 1:
+        return n
+
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+# note: time is O(2^n), space is O(n) (height of recursion tree)
