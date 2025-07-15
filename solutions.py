@@ -700,3 +700,30 @@ def is_univalue_list(head):
         return False 
 
     return is_univalue_list(head.next)
+
+
+
+
+#* 29 (3.9)
+''' Given the head of a linked list, 
+    return length of longest consecutive streak of the same value in the list '''
+
+def longest_streak(head):
+    prev = None 
+    curr = head 
+    len_longest_streak = 0
+    len_current_streak = 0
+
+    while curr is not None:
+        if prev is not None and prev.val == curr.val:
+            len_current_streak += 1
+        else:
+            len_current_streak = 1
+
+        if len_current_streak > len_longest_streak:
+            len_longest_streak = len_current_streak
+
+        prev = curr 
+        curr = curr.next 
+
+    return len_longest_streak
