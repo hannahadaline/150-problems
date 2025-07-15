@@ -613,3 +613,54 @@ def zipper_lists(head_1, head_2):
         tail.next = curr_1 
 
     return placeholder_head.next 
+
+
+
+#* 27 (3.7)
+''' Given two heads of two sorted linked lists in increasing order,
+    Merge the lists into a single sorted list and return its head '''
+
+# ITERATIVE
+def merge_lists(head_1, head_2):
+    placeholder_head = Node("None")
+    tail = placeholder_head 
+    curr_1 = head_1 
+    curr_2 = head_2 
+
+    while curr_1 is not None and curr_2 is not None:
+        if curr_1.val < curr_2.val:
+            tail.next = curr_1 
+            curr_1 = curr_1.next 
+        else:
+            tail.next = curr_2 
+            curr_2 = curr_2.next 
+        tail = tail.next
+
+    if curr_1 is None:
+        tail.next = curr_2 
+    if curr_2 is None:
+        tail.next = curr_1 
+        
+    return placeholder_head.next 
+
+# RECURSIVE
+def merge_lists(head_1, head_2):
+    if head_1 is None and head_2 is None:
+        return None 
+
+    if head_1 is None:
+        return head_2
+
+    if head_2 is None:
+        return head_1 
+
+    next_1 = head_1.next 
+    next_2 = head_2.next
+
+    if head_1.val > head_2.val:
+        head_2.next = merge_lists(head_1, next_2)
+        return head_2
+
+    else: 
+        head_1.next = merge_lists(next_1, head_2)
+        return head_1 
