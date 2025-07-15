@@ -664,3 +664,39 @@ def merge_lists(head_1, head_2):
     else: 
         head_1.next = merge_lists(next_1, head_2)
         return head_1 
+
+
+
+#* 28 (3.8)
+''' Given the head of a linked list, 
+    return whether the linked list contains only one unique value '''
+
+# ITERATIVE
+def is_univalue_list(head):
+    val = head.val 
+    curr = head 
+    
+    while curr is not None:
+        if curr.val != val:
+            return False 
+        curr = curr.next
+        
+    return True 
+
+
+# RECURSIVE
+def is_univalue_list(head):
+    if head.next is None:
+        return True 
+
+    return head.val == head.next.val and is_univalue_list(head.next)
+
+# This is more efficient
+def is_univalue_list(head):
+    if head.next is None:
+        return True 
+
+    if head.val != head.next.val:
+        return False 
+
+    return is_univalue_list(head.next)
