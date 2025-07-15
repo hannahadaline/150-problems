@@ -385,3 +385,33 @@ def fibonacci(n):
     return fibonacci(n - 1) + fibonacci(n - 2)
 
 # note: time is O(2^n), space is O(n) (height of recursion tree)
+
+
+
+
+#* 21 (3.1)
+''' Given the head of a linked list, 
+    return a list of all the node values in the linked list '''
+
+# ITERATIVE
+def linked_list_values(head):
+    values = []
+    curr = head
+    while curr is not None:
+        values.append(curr.val)
+        curr = curr.next 
+
+    return values
+
+# RECURSIVE
+def linked_list_values(head):
+    values = []
+    fill_values(head, values)
+    return values
+
+def fill_values(head, values):
+    if head is None:
+        return
+
+    values.append(head.val)
+    fill_values(head.next, values)
