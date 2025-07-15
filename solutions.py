@@ -200,3 +200,48 @@ def intersection_with_dupes(a, b):
         result.extend([ char for i in range(num_common_occurrences) ])
 
     return result
+
+
+#* 15 (2.1)
+''' Given a list of numbers, compute its sum recursively '''
+
+def sum_numbers_recursive(numbers):
+    if len(numbers) == 0:
+        return 0
+
+    return numbers[0] + sum_numbers_recursive(numbers[1:])
+
+
+
+#* 16 (2.2)
+''' Given a number, compute its factorial recursively '''
+
+def factorial(n):
+    if n == 0:
+        return 1
+
+    return n * factorial(n - 1)
+
+# This is O(n) time and O(n) space
+
+
+
+#* 17 (2.3)
+''' Given a list of strings, compute the sum of lengths of strings recursively '''
+
+def sum_of_lengths(strings):
+    if len(strings) == 0:
+        return 0
+
+    return len(strings[0]) + sum_of_lengths(strings[1:])
+
+
+
+#* 18 (2.4) 
+''' Given a string, reverse it recursively '''
+
+def reverse_string(s):
+    if len(s) == 0:
+        return ""
+
+    return s[-1] + reverse_string(s[:-1])
