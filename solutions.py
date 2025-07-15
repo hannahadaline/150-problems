@@ -554,3 +554,62 @@ def _reverse_list(head, prev):
     head.next = prev 
 
     return _reverse_list(next, head)
+
+
+
+
+#*26 (3.6)
+''' Given the heads of two linked lists,
+    Zipper the nodes in alternating order (starting with the first head) 
+    and return the head of the resulting linked list
+    If one list is longer than the other, end with its extra nodes '''
+
+# RECURSIVE
+def zipper_lists(head_1, head_2):
+    if head_1 is None and head_2 is None:
+        return None 
+
+    elif head_1 is None:
+        return head_2
+
+    elif head_2 is None:
+        return head_1
+
+    next_1 = head_1.next 
+    next_2 = head_2.next 
+
+    head_1.next = head_2
+    head_2.next = zipper_lists(next_1, next_2)
+
+    return head_1
+
+# ITERATIVE
+class Node:
+  def __init__(self, val):
+    self.val = val
+    self.next = None
+
+def zipper_lists(head_1, head_2):
+    placeholder_head = Node("None")
+    tail = placeholder_head 
+    curr_1 = head_1 
+    curr_2 = head_2 
+
+    while curr_1 is not None and curr_2 is not None:
+        next_1 = curr_1.next 
+        next_2 = curr_2.next 
+        
+        tail.next = curr_1 
+        curr_1.next = curr_2 
+        tail = curr_2 
+        
+        curr_1 = next_1 
+        curr_2 = next_2 
+
+    if curr_1 is None:
+        tail.next = curr_2 
+
+    if curr_2 is None:
+        tail.next = curr_1 
+
+    return placeholder_head.next 
