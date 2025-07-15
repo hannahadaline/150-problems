@@ -415,3 +415,42 @@ def fill_values(head, values):
 
     values.append(head.val)
     fill_values(head.next, values)
+
+
+#* 22 (3.2)
+''' Given the head of a linked list of numbers,
+    Return the sum of all the numbers in the linked list '''
+
+# ITERATIVE 
+def sum_list(head):
+    sum = 0
+    curr = head
+
+    while curr is not None:
+        sum += curr.val 
+        curr = curr.next 
+
+    return sum
+
+
+# RECURSIVE
+def sum_list(head):
+    sum = [0]
+    _sum_list(head, sum)
+    return sum [0]
+
+def _sum_list(head, sum):
+    if head is None:
+        return sum[0]
+
+    sum[0] += head.val 
+    _sum_list(head.next, sum)
+
+# The reason we need to use [0] instead of 0 is because an int is not mutable but a list is
+
+# RECURSIVE, ELEGANT
+def sum_list(head):
+    if head is None:
+        return 0 
+
+    return head.val + sum_list(head.next)
