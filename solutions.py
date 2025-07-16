@@ -727,3 +727,38 @@ def longest_streak(head):
         curr = curr.next 
 
     return len_longest_streak
+
+
+
+
+#* 30 (3.10)
+''' Given a head of a linked list and an index,
+    Remove the node at that index and return the head of the resulting linked list '''
+
+# ITERATIVE
+def remove_node(head, target_val):
+    prev = None
+    curr = head
+
+    if head.val == target_val:
+        return head.next 
+
+    while curr is not None:
+        if curr.val == target_val:
+            next = curr.next 
+            prev.next = next 
+            curr.next = None 
+            return head 
+        prev = curr 
+        curr = curr.next 
+
+# RECURSIVE
+def remove_node(head, target_val):
+    if head is None:
+        return None 
+
+    if head.val == target_val:
+        return head.next 
+
+    head.next = remove_node(head.next, target_val)
+    return head
