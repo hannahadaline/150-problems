@@ -25,3 +25,31 @@ def depth_first_values(root):
             stack.append(curr.left)
 
     return values 
+
+
+
+#* 33 (4.2) 
+''' Given a root of a binary tree,
+  Return a list of values in breadth first order '''
+
+from collections import deque 
+
+def breadth_first_values(root):
+    if root is None:
+        return []
+        
+    values = []
+    queue = deque([ root ])
+
+    while len(queue) > 0:
+        curr = queue.popleft()
+        values.append(curr.val)
+
+        if curr.left is not None:
+            queue.append(curr.left)
+        if curr.right is not None:
+            queue.append(curr.right)
+
+    return values
+    
+
