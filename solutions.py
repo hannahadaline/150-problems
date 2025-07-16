@@ -762,3 +762,54 @@ def remove_node(head, target_val):
 
     head.next = remove_node(head.next, target_val)
     return head
+
+
+
+
+#* 31 (3.11)
+''' Given the head of a linked list and an index 
+    (no bigger than the length of the linked list),
+    Insert the node at the index and return the head of the resulting linked list ''' 
+
+class Node:
+  def __init__(self, val):
+    self.val = val
+    self.next = None
+
+# ITERATIVE 
+def insert_node(head, value, index):
+    new_node = Node(value)
+
+    if index == 0:
+        new_node.next = head 
+        return new_node 
+
+    curr_index = 0
+    curr_node = head 
+    prev_node = None
+
+    while curr_node is not None:
+        if curr_index == index:
+            prev_node.next = new_node 
+            new_node.next = curr_node 
+            return head 
+            
+        prev_node = curr_node 
+        curr_node = curr_node.next 
+        curr_index += 1
+
+    prev_node.next = new_node 
+    return head 
+
+
+# RECURSIVE
+
+def insert_node(head, value, index):
+    if index == 0:
+        new_node = Node(value)
+        new_node.next = head 
+        return new_node 
+
+    head.next = insert_node(head.next, value, index - 1)
+    return head 
+            
