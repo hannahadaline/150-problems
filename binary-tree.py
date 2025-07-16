@@ -53,3 +53,54 @@ def breadth_first_values(root):
     return values
     
 
+
+
+#* 34 (4.3) 
+''' Given the root of a tree, return the sum of all values in the tree '''
+
+# RECURSIVE
+def tree_sum(root):
+    if root is None:
+        return 0 
+
+    return tree_sum(root.left) + root.val + tree_sum(root.right)
+
+# BREADTH FIRST
+from collections import deque 
+
+def tree_sum(root):
+    if root is None:
+        return 0 
+
+    sum = 0
+    queue = deque([ root ])
+
+    while len(queue) > 0:
+        curr = queue.popleft()
+        sum += curr.val 
+
+        if curr.left is not None:
+            queue.append(curr.left)
+        if curr.right is not None:
+            queue.append(curr.right)
+
+    return sum
+
+# DEPTH FIRST
+def tree_sum(root):
+    if root is None:
+        return 0 
+
+    stack = [ root ]
+    sum = 0
+
+    while len(stack) > 0:
+        curr = stack.pop()
+        sum += curr.val
+
+        if curr.right is not None:
+            stack.append(curr.right)
+        if curr.left is not None:
+            stack.append(curr.left)
+
+    return sum
