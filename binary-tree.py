@@ -104,3 +104,19 @@ def tree_sum(root):
             stack.append(curr.left)
 
     return sum
+
+
+
+
+#*35 (4.4)
+''' Given the root of a tree and a target value, 
+    return whether the target value is found in the tree '''
+
+def tree_includes(root, target):
+    if root is None:
+        return False
+        
+    if root.val == target:
+        return True 
+
+    return tree_includes(root.left, target) or tree_includes(root.right, target)
