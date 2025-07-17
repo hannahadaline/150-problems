@@ -149,3 +149,39 @@ def max_path_sum(root):
         return root.val 
 
     return root.val + max(max_path_sum(root.left), max_path_sum(root.right))
+
+
+
+
+#* 38 (4.7)
+''' Given the root of a binary tree and a target value,
+    return a list of values indicating the path starting from the root to the value 
+    return None if the value is not found '''
+
+def path_finder(root, target):
+    if _path_finder(root, target) is not None:
+        return _path_finder(root, target)[::-1]
+    return None
+    
+def _path_finder(root, target):
+    if root is None:
+        return None 
+        
+    if root.val == target:
+        return [ target ]
+
+    left_path = _path_finder(root.left, target)
+    if left_path is not None:
+        left_path.append(root.val)
+        return left_path 
+
+    right_path = _path_finder(root.right, target)
+    if right_path is not None:
+        right_path.append(root.val)
+        return right_path 
+
+    return None
+    
+
+            
+
