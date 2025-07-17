@@ -120,3 +120,18 @@ def tree_includes(root, target):
         return True 
 
     return tree_includes(root.left, target) or tree_includes(root.right, target)
+
+
+
+
+#* 36 (4.5)
+''' Given the root of a tree,
+    return the min value in the tree '''
+
+def tree_min_value(root):
+    left_min_value = float("inf") if root.left is None else tree_min_value(root.left)
+    right_min_value = float("inf") if root.right is None else tree_min_value(root.right)
+
+    return min(left_min_value, root.val, right_min_value)
+
+    
