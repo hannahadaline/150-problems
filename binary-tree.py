@@ -134,4 +134,18 @@ def tree_min_value(root):
 
     return min(left_min_value, root.val, right_min_value)
 
-    
+
+
+
+#* 37 (4.6)
+''' Given the root of a binary tree of numbers,
+  return the max root to leaf path sum '''
+
+def max_path_sum(root):
+    if root is None:
+        return float("-inf")
+
+    if root.left is None and root.right is None:
+        return root.val 
+
+    return root.val + max(max_path_sum(root.left), max_path_sum(root.right))
