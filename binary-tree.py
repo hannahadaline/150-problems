@@ -184,4 +184,13 @@ def _path_finder(root, target):
     
 
             
+#* 39 (4.8)
+''' Given a root of a binary tree and a target value,
+    return the number of times the target value appears in the tree '''
 
+def tree_value_count(root, target):
+    if root is None:
+        return 0 
+
+    root_count = 1 if root.val == target else 0
+    return tree_value_count(root.left, target) + root_count + tree_value_count(root.right, target)
