@@ -194,3 +194,15 @@ def tree_value_count(root, target):
 
     root_count = 1 if root.val == target else 0
     return tree_value_count(root.left, target) + root_count + tree_value_count(root.right, target)
+
+
+
+
+##* 40 (4.9)
+''' Given the root of a binary tree, return its height '''
+
+def how_high(root):
+    if root is None:
+        return -1 
+
+    return 1 + max(how_high(root.left), how_high(root.right))
