@@ -206,3 +206,34 @@ def how_high(root):
         return -1 
 
     return 1 + max(how_high(root.left), how_high(root.right))
+
+
+
+
+#* 41 (4.10)
+''' Given the root of a binary tree, return the rightmost value in the bottommost level '''
+
+from collections import deque
+
+def bottom_right_value(root):
+    values = []
+    if root is None:
+        return values
+
+    queue = deque([ root ])
+
+    while len(queue) > 0:
+        curr = queue.popleft()
+        values.append(curr.val)
+
+        if curr.left is not None:
+            queue.append(curr.left)
+        if curr.right is not None:
+            queue.append(curr.right)
+
+    return values[-1]
+
+
+
+    
+    
