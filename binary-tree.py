@@ -235,5 +235,32 @@ def bottom_right_value(root):
 
 
 
+
+
+#* 42 (4.11)
+''' Given the root of a binary tree,
+    return a list of all root-to-leaf paths in the tree ''' 
+
+def all_tree_paths(root):
+    all_paths = _all_tree_paths(root)
+    for path in all_paths:
+        path.reverse()
+
+    return all_paths
+    
+def _all_tree_paths(root):
+    if root is None:
+        return [ ]
+
+    if root.left is None and root.right is None:
+        return [ [ root.val ] ]
+        
+    all_left_tree_paths = [ path + [ root.val ] for path in _all_tree_paths(root.left) ] 
+    all_right_tree_paths = [ path + [ root.val ] for path in _all_tree_paths(root.right) ] 
+
+    return [ *all_left_tree_paths, *all_right_tree_paths ]
+
+
+
     
     
