@@ -264,3 +264,47 @@ def _all_tree_paths(root):
 
     
     
+#* 43 (4.12)
+''' Given the root of a binary tree,
+    return a 2-d list of lists where each sublist 
+    contains the values in a given level of the tree '''
+
+# ITERATIVE (breadth first)
+
+from collections import deque 
+
+def tree_levels(root):
+    if root is None:
+        return [ ]
+
+    queue = deque([ (root, 0) ])
+    levels = [ ]
+
+    while len(queue) > 0:
+        curr_node, curr_level = queue.popleft()
+
+        if curr_level == len(levels):
+            levels.append([ curr_node.val ])
+        else:
+            levels[curr_level].append(curr_node.val)
+
+        if curr_node.left is not None:
+            queue.append((curr_node.left, curr_level + 1))
+        if curr_node.right is not None:
+            queue.append((curr_node.right, curr_level + 1))
+
+    return levels
+
+# RECURSIVE
+
+def fill_levels(root, levels, level):
+    if root is None:
+        return 
+
+    if len(levels) == level:
+        levels.append([ root.val ])
+    else:
+        levels[level].append(root.val)
+
+    fill_levels(root.left, levels, level + 1)
+    fill_levels(root.right, levels, level + 1) # have to go left to right within each level
