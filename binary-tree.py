@@ -334,3 +334,24 @@ def fill_levels(root, levels, level):
 
     fill_levels(root.left, levels, level + 1)
     fill_levels(root.right, levels, level + 1)
+
+
+
+
+#45 (4.14)
+''' Given the root of a binary tree,
+    return a list of all its leaves' values from left to right ''' 
+
+def leaf_list(root):
+    leaves = []
+    get_leaves(root, leaves)
+    return leaves
+
+def get_leaves(root, leaves):
+    if root is None:
+        return 
+    if root.left is None and root.right is None:
+        leaves.append(root.val)
+
+    get_leaves(root.left, leaves)
+    get_leaves(root.right, leaves)
