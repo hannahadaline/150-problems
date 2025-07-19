@@ -308,3 +308,29 @@ def fill_levels(root, levels, level):
 
     fill_levels(root.left, levels, level + 1)
     fill_levels(root.right, levels, level + 1) # have to go left to right within each level
+
+
+
+
+#* 44 (4.13)
+''' Given the root of a binary tree,
+    return a list of the average of the values in each level '''
+
+def level_averages(root):
+    levels = []
+    level = 0
+    fill_levels(root, levels, level)
+
+    return [ sum(level) / len(level) for level in levels ]
+
+def fill_levels(root, levels, level):
+    if root is None:
+        return 
+
+    if level == len(levels):
+        levels.append([ root.val ])
+    else:
+        levels[level].append(root.val)
+
+    fill_levels(root.left, levels, level + 1)
+    fill_levels(root.right, levels, level + 1)
