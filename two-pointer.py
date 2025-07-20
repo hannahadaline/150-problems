@@ -12,3 +12,28 @@ def is_palindrome(s):
         j -= 1
 
     return True 
+
+
+
+
+#* 47 (5.2)
+''' Given a string formatted in concatenated <number><char> format like 2a127b,
+    return the uncompressed string '''
+
+def uncompress(s):
+    i = 0
+    j = 0
+    result = []
+    digits = '0123456789'
+
+    while j < len(s):
+        if s[j] in digits:
+            j += 1
+        else:
+            count = int(s[i:j])
+            char = s[j]
+            result.append(count * char)
+            j += 1
+            i = j
+
+    return ''.join(result)
