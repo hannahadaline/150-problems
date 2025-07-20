@@ -98,4 +98,24 @@ def five_sort(nums):
 
     return nums
         
-            
+
+
+
+#* 50 (5.5)
+''' Given two strings,
+    return whether the second one contains all the characters of the first, in that order '''
+
+def is_subsequence(string_1, string_2):
+    i_1 = 0 
+    i_2 = 0 
+
+    while i_1 < len(string_1) and i_2 < len(string_2):
+        if string_1[i_1] != string_2[i_2]:
+            i_2 += 1
+        else:
+            i_1 += 1 
+            i_2 += 1
+            if i_1 == len(string_1):
+                return True 
+
+    return False 
