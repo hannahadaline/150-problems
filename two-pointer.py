@@ -37,3 +37,34 @@ def uncompress(s):
             i = j
 
     return ''.join(result)
+
+
+
+
+#* 48 (5.3)
+''' Given a string of lowercase letters like caatsss,
+    return the compressed version where every block of consecutive characters 
+    is replaced by the number of characters then the character 
+    (or just the character if one occurrence) '''
+
+def compress(s):
+    i = 0
+    j = 1
+    result = []
+    s += ' '
+
+    while j < len(s):
+        if s[j] == s[i]:
+            j += 1
+        else:
+            count = j - i 
+            char = s[i]
+            if count > 1:
+                result.append(str(count) + char)
+            else:
+                result.append(char)
+            i = j 
+            j += 1 
+
+    return ''.join(result)
+            
