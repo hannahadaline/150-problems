@@ -67,4 +67,35 @@ def compress(s):
             j += 1 
 
     return ''.join(result)
+
+
+
+
+#* 49 (5.4)
+''' Given an array of numbers,
+    Move all 5s to the end of the array, in-place
+    (the order of the other numbers does not matter) '''
+
+def five_sort(nums):
+    i = 0
+    j = len(nums) - 1
+
+    while i < j:
+        # neither is 5
+        if nums[i] != 5 and nums[j] != 5:
+            i += 1 
+        # just nums[i] is 5 
+        elif nums[i] == 5 and nums[j] != 5:
+            nums[i], nums[j] = nums[j], nums[i] 
+            i += 1 
+            j -= 1 
+        # just nums[j] is 5 
+        elif nums[j] == 5 and nums[i] != 5:
+            j -= 1 
+        # both are 5 
+        else:
+            j -= 1
+
+    return nums
+        
             
