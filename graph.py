@@ -65,3 +65,30 @@ def undirected_path(edges, node_A, node_B):
     graph = get_graph(edges)
     visited = set()
     return _undirected_path(graph, node_A, node_B, visited)
+
+
+
+#* 53 (6.3)
+''' Given the adjacency list of an undirected graph, 
+    return the number of connected components within the graph '''
+
+def connected_components_count(graph):
+  count = 0 
+  visited = set()
+
+  for node in graph:
+    if explore(graph, node, visited) == True:
+      count += 1 
+
+  return count 
+
+def explore(graph, node, visited):
+    if node in visited:
+        return False 
+
+    visited.add(node)
+
+    for neighbor in graph[node]:
+        explore(graph, neighbor, visited)
+
+    return True 
