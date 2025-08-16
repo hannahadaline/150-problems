@@ -27,3 +27,41 @@ def has_path(graph, src, dst):
         for node in graph[curr]:
             queue.append(node)
     return False 
+
+
+
+
+#* 52 (6.2)
+''' Given a list of edges of an undirected graph, and two nodes, 
+    return whether there exists a path between the two nodes '''
+
+def get_graph(edges):
+    graph = {}
+    for node_1, node_2 in edges:
+        if node_1 in graph:
+            graph[node_1].append(node_2)
+        else:
+            graph[node_1] = [ node_2 ]
+        if node_2 in graph:
+            graph[node_2].append(node_1)
+        else:
+            graph[node_2] = [ node_1 ]
+
+    return graph
+
+def _undirected_path(graph, node_A, node_B, visited):
+    if node_A == node_B:
+        return True 
+
+    for neighbor in graph[node_A]:
+        if neighbor not in visited:
+            visited.add(neighbor)
+            if _undirected_path(graph, neighbor, node_B, visited):
+                return True 
+
+    return False 
+    
+def undirected_path(edges, node_A, node_B):
+    graph = get_graph(edges)
+    visited = set()
+    return _undirected_path(graph, node_A, node_B, visited)
