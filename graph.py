@@ -92,3 +92,34 @@ def explore(graph, node, visited):
         explore(graph, neighbor, visited)
 
     return True 
+
+
+
+
+#* 54 (6.4)
+''' Given the adjacency list of an undirected graph, 
+    return the size of the largest connected component within the graph '''
+
+def largest_component(graph):
+    visited = set()
+    max_size = 0
+    for node in graph:
+        size = explore(graph, node, visited, 0) 
+        if size > max_size:
+            max_size = size
+
+    return max_size
+
+
+def explore(graph, node, visited, size):
+    if node in visited:
+        return 0
+
+    size = 1
+    visited.add(node)
+
+    for neighbor in graph[node]:
+        size += explore(graph, neighbor, visited, size)
+
+    return size 
+
