@@ -166,3 +166,48 @@ def get_graph(edges):
         graph[node_2].append(node_1)
 
     return graph 
+
+
+
+
+
+#* 56 (6.6)
+''' Given a grid containing Ws (water) and Ls (land), 
+    return the number of islands (vertically or horizontally 
+    connected region of land) on the grid '''
+
+def island_count(grid):
+    count = 0 
+    visited = set()
+
+    for i in range(0, len(grid)):
+        for j in range(0, len(grid[0])):
+            if explore(grid, i, j, visited) == True:
+                count += 1
+
+    return count 
+
+def explore(grid, i, j, visited):
+    if i not in range(0, len(grid)):
+        return False 
+    if j not in range(0, len(grid[0])):
+        return False
+
+    if (i, j) in visited:
+        return False 
+
+    if grid[i][j] == 'W':
+        return False 
+
+    visited.add( (i, j) )
+
+    explore(grid, i + 1, j, visited)
+    explore(grid, i - 1, j, visited)
+    explore(grid, i, j + 1, visited)
+    explore(grid, i, j - 1, visited)
+
+    return True
+
+    
+    
+    
