@@ -250,3 +250,35 @@ def get_size(grid, i, j, visited):
 
     return size
         
+
+
+
+#* 58 (6.8)
+''' Given a grid containing Xs (walls, cannot pass through) 
+    and Os (open spaces) and Cs (carrots), 
+    return the distance from the starting position to the closest carrot '''
+
+from collections import deque 
+
+def closest_carrot(grid, starting_row, starting_col):
+    visited = set()
+    return explore(grid, starting_row, starting_col, visited)
+
+
+def explore(grid, starting_row, starting_col, visited):
+    queue = deque([ ((starting_row, starting_col), 0) ])
+
+    while len(queue) > 0:
+        (r, c), dist = queue.popleft()
+        if 0 <= r < len(grid) and 0 <= c < len(grid[0]) and (r, c) not in visited and grid[r][c] != 'X':
+            visited.add( (r, c) )
+            if grid[r][c] == 'C':
+                return dist 
+
+            neighbors = [ (r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1) ]
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    queue.append( (neighbor, dist + 1) )
+
+    return -1
+            
