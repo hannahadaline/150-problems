@@ -123,3 +123,46 @@ def explore(graph, node, visited, size):
 
     return size 
 
+
+
+
+#* 55 (6.5)
+''' Given a list of edges for an undirected graph, and two nodes, 
+    return the length of the shortest path between the two nodes.  
+    If there is no path between the two nodes, return -1 '''
+
+from collections import deque 
+
+def shortest_path(edges, node_A, node_B):
+    graph = get_graph(edges)
+    visited = set()
+    return _shortest_path(graph, node_A, node_B, visited)
+
+def _shortest_path(graph, node_A, node_B, visited):
+    queue = deque([ (node_A, 0) ])
+
+    while len(queue) > 0:
+        curr_node, curr_dist = queue.popleft()
+        if curr_node not in visited:
+            visited.add(curr_node)
+            if curr_node == node_B:
+                return curr_dist 
+    
+            for neighbor in graph[curr_node]:
+                if neighbor not in visited:
+                    queue.append( (neighbor, curr_dist + 1) )
+
+    return -1
+
+def get_graph(edges):
+    graph = {}
+    for node_1, node_2 in edges:
+        if node_1 not in graph:
+            graph[node_1] = []
+        if node_2 not in graph:
+            graph[node_2] = []
+
+        graph[node_1].append(node_2)
+        graph[node_2].append(node_1)
+
+    return graph 
