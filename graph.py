@@ -209,5 +209,44 @@ def explore(grid, i, j, visited):
     return True
 
     
+
+
+
+#* 57 (6.7)
+''' Given a grid containing Ws (water) and Ls (land), 
+    return the size of the smallest island (vertically or horizontally 
+    connected region of land) on the grid '''
     
-    
+def minimum_island(grid):
+    min_island_size = float('inf')
+    visited = set()
+    for i in range(0, len(grid)):
+        for j in range(0, len(grid[0])):
+            size = get_size(grid, i, j, visited) 
+            if size > 0 and size < min_island_size:
+                min_island_size = size
+
+    return min_island_size
+            
+def get_size(grid, i, j, visited):
+    if i not in range(0, len(grid)):
+        return 0
+    if j not in range(0, len(grid[0])):
+        return 0
+
+    if grid[i][j] == 'W':
+        return 0
+
+    if (i, j) in visited:
+        return 0
+
+    visited.add( (i, j) )
+
+    size = 1 
+    size += get_size(grid, i + 1, j, visited)
+    size += get_size(grid, i - 1, j, visited)
+    size += get_size(grid, i, j + 1, visited)
+    size += get_size(grid, i, j - 1, visited)
+
+    return size
+        
