@@ -282,3 +282,35 @@ def explore(grid, starting_row, starting_col, visited):
 
     return -1
             
+
+
+
+
+#* 59 (6.9)
+''' Given a directed acyclic graph's adjacency list, 
+    return the length of the longest path within the graph '''
+
+def longest_path(graph):
+    distances = {}
+    for node in graph:
+        if len(graph[node]) == 0:
+            distances[node] = 0 
+
+    for node in graph:
+        traverse(graph, node, distances)
+
+    return max(distances.values())
+
+def traverse(graph, node, distances):
+    if node in distances:
+        return distances[node]
+
+    max_path_len = 0 
+    for neighbor in graph[node]:
+        path_len = traverse(graph, neighbor, distances)
+        if path_len > max_path_len:
+            max_path_len = path_len 
+
+    distances[node] = max_path_len + 1 
+    return distances[node]
+    
