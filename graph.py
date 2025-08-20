@@ -314,3 +314,49 @@ def traverse(graph, node, distances):
     distances[node] = max_path_len + 1 
     return distances[node]
     
+
+
+
+
+#* 60 (6.10)
+''' Given a number of courses and a list of prerequisites, 
+    return the minimum number of semesters required to complete all courses.  
+    Courses have ids ranging from 0 to n - 1, where n is the number of courses.  
+    There is no limit on how many couress you can take in a semester. '''
+
+def semesters_required(num_courses, prereqs):
+    graph = make_graph(num_courses, prereqs)
+
+    distances = {}
+    for node in graph:
+        if len(graph[node]) == 0:
+            distances[node] = 0 
+
+    for node in graph:
+        traverse(graph, node, distances)
+
+    return max(distances.values()) + 1
+
+def traverse(graph, node, distances):
+    if node in distances:
+        return distances[node]
+
+    max_path_len = 0 
+    for neighbor in graph[node]:
+        path_len = traverse(graph, neighbor, distances)
+        if path_len > max_path_len:
+            max_path_len = path_len 
+
+    distances[node] = max_path_len + 1 
+    return distances[node]
+
+def make_graph(num_courses, prereqs):
+    graph = {}
+    for i in range(num_courses):
+        graph[i] = []
+
+    for course_1, course_2 in prereqs:
+        graph[course_1].append(course_2)
+
+    return graph 
+    
