@@ -6,3 +6,6 @@ My solutions to 150 algorithms problems
 2. Recursion (6)
 3. Linked List (11)
 4. Binary Tree (14)
+5. Two Pointer (5)
+6. Graph (12)
+7. Dynamic Programming (16)
