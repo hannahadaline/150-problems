@@ -436,3 +436,38 @@ def explore(grid, i, j, visited):
 
     return 
     
+
+
+
+#* 62 (6.12)
+''' Given an adjacency list for a directed graph, 
+    return whether there are any cycles in the graph '''
+
+# note that if any neighbor finds a cycle then 
+# you have to return True right away, because you found a cycle too
+def has_cycle(graph):
+    visited = set()
+    visiting = set()
+    for node in graph:
+        if explore(graph, node, visited, visiting) == True:
+            return True 
+
+    return False 
+
+def explore(graph, node, visited, visiting):
+    if node in visiting:
+        return True
+
+    if node in visited:
+        return False 
+
+    visiting.add(node)
+
+    for neighbor in graph[node]:
+        if explore(graph, neighbor, visited, visiting) == True:
+            return True 
+
+    visiting.remove(node)
+    visited.add(node)
+
+    return False 
