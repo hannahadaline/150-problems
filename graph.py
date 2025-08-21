@@ -360,3 +360,79 @@ def make_graph(num_courses, prereqs):
 
     return graph 
     
+
+
+
+#* 61 (6.11)
+''' Given a grid containing Ws (water) and Ls (land), 
+    where there are two islands (vertically or horizontally 
+    connected region of land) on the grid,
+    return the minimum length bridge needed to connect the two islands '''
+
+# the trick here is to bfs from the set of positions in the first island as a group
+# if you bfs from each position individually and then find the minimum from there,
+# you're not taking into account that joining the positions together minimizes your bridge
+
+from collections import deque 
+
+def best_bridge(grid):
+    first_island = get_first_island(grid)
+
+    queue = deque([])
+    for (r, c) in first_island:
+        queue.append(((r, c), 0))
+
+    visited = first_island.copy()
+    
+    while len(queue) > 0:
+        (r, c), dist = queue.popleft()
+
+        if 0 <= r < len(grid) and 0 <= c < len(grid[0]):
+    
+            if grid[r][c] == 'L' and (r, c) not in visited:
+                return dist - 1
+    
+            neighbors = [ (r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1) ]
+            for neighbor in neighbors:
+                if neighbor not in visited:
+                    queue.append( (neighbor, dist + 1) )
+
+
+def get_first_island(grid):
+    island_1_i = None 
+    island_1_j = None 
+    
+    for i in range(0, len(grid)):
+        for j in range(0, len(grid[0])):
+            if grid[i][j] == 'L':
+                island_1_i = i 
+                island_1_j = j
+                break
+
+    visited = set()
+    explore(grid, island_1_i, island_1_j, visited)
+    return visited
+
+
+
+def explore(grid, i, j, visited):
+    if i not in range(0, len(grid)):
+        return 
+    if j not in range(0, len(grid[0])):
+        return 
+
+    if (i, j) in visited:
+        return 
+
+    if grid[i][j] == 'W':
+        return
+
+    visited.add( (i, j) )
+
+    explore(grid, i + 1, j, visited)
+    explore(grid, i - 1, j, visited)
+    explore(grid, i, j + 1, visited)
+    explore(grid, i, j - 1, visited)
+
+    return 
+    
