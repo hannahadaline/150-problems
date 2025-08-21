@@ -322,7 +322,7 @@ def traverse(graph, node, distances):
 ''' Given a number of courses and a list of prerequisites, 
     return the minimum number of semesters required to complete all courses.  
     Courses have ids ranging from 0 to n - 1, where n is the number of courses.  
-    There is no limit on how many couress you can take in a semester. '''
+    There is no limit on how many courses you can take in a semester. '''
 
 def semesters_required(num_courses, prereqs):
     graph = make_graph(num_courses, prereqs)
@@ -471,3 +471,50 @@ def explore(graph, node, visited, visiting):
     visited.add(node)
 
     return False 
+
+
+
+#* 63 (6.13)
+''' Given a number of courses and a list of prerequisites, 
+    return whether it is possible to complete all courses.  
+    Courses have ids ranging from 0 to n - 1, where n is the number of courses.  
+    There is no limit on how many courses you can take in a semester. '''
+
+def prereqs_possible(num_courses, prereqs):
+    graph = make_graph(num_courses, prereqs)
+    return not has_cycle(graph)
+
+def has_cycle(graph):
+    visiting = set()
+    visited = set()
+    for node in graph:
+        if find_cycle(graph, node, visited, visiting):
+            return True 
+    return False
+
+def find_cycle(graph, node, visited, visiting):
+    if node in visited:
+        return False 
+    if node in visiting:
+        return True 
+
+    visiting.add(node)
+    for neighbor in graph[node]:
+        if find_cycle(graph, neighbor, visited, visiting) == True:
+            return True 
+
+    visiting.remove(node)
+    visited.add(node)
+
+    return False 
+    
+def make_graph(num_courses, prereqs):
+    graph = {}
+    for course in range(num_courses):
+        graph[course] = []
+
+    for course_1, course_2 in prereqs:
+        graph[course_1].append(course_2)
+
+    return graph 
+    
