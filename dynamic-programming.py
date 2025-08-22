@@ -174,3 +174,27 @@ def _max_path_sum(grid, end_row, end_col, memo):
     return memo[pos]
     
 
+
+
+#* 70 (7.7)
+''' Given a list of numbers, 
+    return the maximum sum of non-adjacent items in the list. '''
+
+def non_adjacent_sum(nums):
+    i = len(nums) - 1
+    memo = {}
+    return _non_adjacent_sum(nums, i, memo)
+
+def _non_adjacent_sum(nums, i, memo):
+    if i == 0:
+        return nums[i]
+
+    if i < 0:
+        return 0 
+
+    if i in memo:
+        return memo[i]
+
+    memo[i] = max(_non_adjacent_sum(nums, i - 1, memo), _non_adjacent_sum(nums, i - 2, memo) + nums[i])
+    return memo[i]
+
