@@ -139,3 +139,38 @@ def _count_paths(grid, start_row, start_col, memo):
 
     memo[pos] = south_neighbor_paths + east_neighbor_paths
     return memo[pos]
+
+
+
+
+
+#* 69 (7.6)
+''' Given a grid of non-negative integers, 
+    return the max sum that can be attained by traveling 
+    from the top left position to the bottom right position, 
+    only moving down or right. '''
+
+def max_path_sum(grid):
+    end_row = len(grid) - 1
+    end_col = len(grid[0]) - 1
+    memo = {}
+    return _max_path_sum(grid, end_row, end_col, memo)
+
+def _max_path_sum(grid, end_row, end_col, memo):
+    if end_row == 0 and end_col == 0:
+        return grid[end_row][end_col]
+
+    if not 0 <= end_row < len(grid) or not 0 <= end_col < len(grid[0]):
+        return 0
+
+    pos = (end_row, end_col)
+    if pos in memo:
+        return memo[pos]
+
+    north_neighbor_paths = _max_path_sum(grid, end_row - 1, end_col, memo)
+    west_neighbor_paths = _max_path_sum(grid, end_row, end_col - 1, memo)
+
+    memo[pos] = max(north_neighbor_paths, west_neighbor_paths) + grid[end_row][end_col]
+    return memo[pos]
+    
+
