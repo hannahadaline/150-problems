@@ -232,4 +232,42 @@ def _summing_squares(n, squares, memo):
     return memo[n]
     
 
-    
+
+
+
+#* 72 (7.9)
+''' Given an amount and a list of coin values, 
+    return the number of ways to sum to the amount using the coins.
+    You can use each coin as much as you need. '''
+
+# both the amount and i changes 
+# you have to remove duplicates so count how many of each coin 
+
+def counting_change(amount, coins):
+    i = 0
+    memo = {}
+    return _counting_change(amount, coins, i, memo)
+
+def _counting_change(amount, coins, i, memo):  
+    if amount == 0:
+        return 1
+
+    if amount < 0:
+        return 0 
+
+    if i == len(coins):
+        return 0
+
+    key = (amount, i)
+    if key in memo:
+        return memo[key]
+
+    total_ways = 0 
+    coin = coins[i]
+    for j in range(0, amount // coin + 1):
+        num_ways = _counting_change(amount - coin * j, coins, i + 1, memo)
+        total_ways += num_ways 
+
+    memo[key] = total_ways
+    return memo[key]
+
