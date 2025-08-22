@@ -271,3 +271,35 @@ def _counting_change(amount, coins, i, memo):
     memo[key] = total_ways
     return memo[key]
 
+
+
+
+#* 73 (7.10)
+''' Given a list of numbers, 
+    return whether it is possible to reach the last position of the list.  
+    You start at the first position and at any position 
+    you can take a max number of steps to the right, given by the number at the position. '''
+
+def array_stepper(numbers):
+    i = 0 
+    memo = {}
+    return _array_stepper(numbers, i, memo)
+
+def _array_stepper(numbers, i, memo):
+    if i >= len(numbers):
+        return False 
+
+    if i == len(numbers) - 1:
+        return True 
+
+    if i in memo:
+        return memo[i]
+
+    max_steps = numbers[i]
+    for j in range(1, max_steps + 1):
+        if _array_stepper(numbers, i + j, memo):
+            memo[i] = True
+            return True 
+
+    memo[i] = False 
+    return False 
