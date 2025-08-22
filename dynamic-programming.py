@@ -198,3 +198,38 @@ def _non_adjacent_sum(nums, i, memo):
     memo[i] = max(_non_adjacent_sum(nums, i - 1, memo), _non_adjacent_sum(nums, i - 2, memo) + nums[i])
     return memo[i]
 
+
+
+
+#* 71 (7.8)
+''' Given a number, 
+    return the minimum number of (non-zero) perfect squares that sum to the number. '''
+
+from math import floor, sqrt
+
+def summing_squares(n):
+    squares = [ i ** 2 for i in range(1, floor(sqrt(n)) + 1) ]
+    memo = {}
+    return _summing_squares(n, squares, memo)
+
+def _summing_squares(n, squares, memo):
+    if n == 0:
+        return 0
+
+    if n < 0:
+        return float('inf')
+
+    if n in memo:
+        return memo[n]
+
+    min_squares_needed = float('inf')
+    for square in squares:
+        squares_needed = _summing_squares(n - square, squares, memo)
+        if squares_needed < min_squares_needed:
+            min_squares_needed = squares_needed + 1
+
+    memo[n] = min_squares_needed
+    return memo[n]
+    
+
+    
