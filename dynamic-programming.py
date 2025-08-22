@@ -71,3 +71,39 @@ def _sum_possible(amount, numbers, memo):
     memo[amount] = False 
     return False 
 
+
+
+#* 67 (7.4)
+''' Given an amount and a list of coins, 
+    return the minimum number of coins needed to sum to the amount.
+    Coins may be used as many times as needed.
+    If it is not possible, return -1 '''
+
+def min_change(amount, coins):
+    memo = {}
+    return _min_change(amount, coins, memo)
+
+def _min_change(amount, coins, memo):
+    if amount == 0:
+        return 0
+
+    if amount < 0:
+        return -1
+
+    if amount in memo:
+        return memo[amount]
+
+    min_coins_needed = float('inf')
+    for coin in coins:
+        coins_needed = _min_change(amount - coin, coins, memo)
+        if coins_needed > -1 and coins_needed < min_coins_needed:
+            min_coins_needed = coins_needed + 1
+
+    if min_coins_needed == float('inf'):
+        memo[amount] = -1 
+        return -1 
+    memo[amount] = min_coins_needed 
+    return min_coins_needed 
+
+
+
