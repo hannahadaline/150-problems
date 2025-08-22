@@ -107,3 +107,35 @@ def _min_change(amount, coins, memo):
 
 
 
+
+
+#* 68 (7.5)
+''' Given a grid of Xs and Os where Xs are walls and Os are open spaces, 
+    return the number of ways to get from the top left corner to the bottom right corner.  
+    You can only move down or to the right and cannot move through walls. '''
+
+def count_paths(grid):
+    start_row = 0 
+    start_col = 0
+    memo = {}
+    return _count_paths(grid, start_row, start_col, memo)
+
+def _count_paths(grid, start_row, start_col, memo):
+    if not 0 <= start_row < len(grid) or not 0 <= start_col < len(grid[0]):
+        return 0
+
+    if grid[start_row][start_col] == 'X':
+        return 0
+
+    if start_row == len(grid) - 1 and start_col == len(grid[0]) - 1:
+        return 1 
+
+    pos = (start_row, start_col)
+    if pos in memo:
+        return memo[pos]
+        
+    south_neighbor_paths = _count_paths(grid, start_row + 1, start_col, memo)
+    east_neighbor_paths = _count_paths(grid, start_row, start_col + 1, memo)
+
+    memo[pos] = south_neighbor_paths + east_neighbor_paths
+    return memo[pos]
