@@ -303,3 +303,35 @@ def _array_stepper(numbers, i, memo):
 
     memo[i] = False 
     return False 
+
+
+
+
+#* 74 (7.11)
+''' Given a string, return the length of the longest subsequence 
+    of the string that is also a palindrome. '''
+
+def max_palin_subsequence(string):
+    i = 0 
+    j = len(string) - 1
+    memo = {}
+    return _max_palin_subsequence(string, i, j, memo)
+
+def _max_palin_subsequence(string, i, j, memo):
+    if i == j:
+        return 1
+        
+    if i > j:
+        return 0
+
+    key = (i, j)
+    if key in memo:
+        return memo[key]
+
+    if string[i] == string[j]:
+        memo[key] = 2 + _max_palin_subsequence(string, i + 1, j - 1, memo)
+        return memo[key]
+
+    memo[key] = max(_max_palin_subsequence(string, i + 1, j, memo), _max_palin_subsequence(string, i, j - 1, memo))
+    return memo[key]
+
