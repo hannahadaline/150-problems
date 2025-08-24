@@ -367,3 +367,34 @@ def _overlap_subsequence(string_1, string_2, i_1, i_2, memo):
     )
     return memo[key]
 
+
+
+
+
+#* 76 (7.13)
+''' Given a string and a list of words, 
+    return whether it is possible to concatenate words in the list 
+    together to form the string.  
+    You can use each word as many times as needed. '''
+
+def can_concat(s, words):
+    i = 0 
+    memo = {}
+    return _can_concat(s, words, i, memo)
+    
+    
+def _can_concat(s, words, i, memo):
+    if i == len(s):
+        return True 
+
+    if i in memo:
+        return memo[i]
+        
+    for word in words:
+        if s.startswith(word, i):
+            if _can_concat(s, words, i + len(word), memo) == True:
+                memo[i] = True
+                return True
+
+    memo[i] = False 
+    return False 
