@@ -435,3 +435,35 @@ def _quickest_concat(s, words, i, memo):
         return memo[i] 
     memo[i] = min_words + 1
     return memo[i]
+
+
+
+
+
+#* 78 (7.15)
+''' Given a target compound and a list of elements, 
+    return whether the compound can be created by 
+    concatenating elements as many times as needed. '''
+
+def valid_compound(compound, elements):
+    i = 0 
+    memo = {}
+    elements_lower = [ element.lower() for element in elements ]
+    return _can_concat(compound, elements_lower, i, memo)
+    
+    
+def _can_concat(compound, elements, i, memo):
+    if i == len(compound):
+        return True 
+
+    if i in memo:
+        return memo[i]
+        
+    for element in elements:
+        if compound.startswith(element, i):
+            if _can_concat(compound, elements, i + len(element), memo) == True:
+                memo[i] = True
+                return True
+
+    memo[i] = False 
+    return False 
