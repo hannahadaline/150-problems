@@ -335,3 +335,35 @@ def _max_palin_subsequence(string, i, j, memo):
     memo[key] = max(_max_palin_subsequence(string, i + 1, j, memo), _max_palin_subsequence(string, i, j - 1, memo))
     return memo[key]
 
+
+
+
+#* 75 (7.12)
+''' Given two strings, return the length of the longest overlapping subsequence.  
+    A subsequence is created by deleting any characters while 
+    maintaining the relative order of characters. '''
+
+def overlap_subsequence(string_1, string_2):
+    i_1 = 0
+    i_2 = 0 
+    memo = {}
+    return _overlap_subsequence(string_1, string_2, i_1, i_2, memo)
+    
+def _overlap_subsequence(string_1, string_2, i_1, i_2, memo):
+    if i_1 == len(string_1) or i_2 == len(string_2):
+        return 0
+
+    key = (i_1, i_2) 
+    if key in memo:
+        return memo[key]
+        
+    if string_1[i_1] == string_2[i_2]:
+        memo[key] = 1 + _overlap_subsequence(string_1, string_2, i_1 + 1, i_2 + 1, memo)
+        return memo[key]
+
+    memo[key] = max(
+        _overlap_subsequence(string_1, string_2, i_1 + 1, i_2, memo),
+        _overlap_subsequence(string_1, string_2, i_1, i_2 + 1, memo)
+    )
+    return memo[key]
+
