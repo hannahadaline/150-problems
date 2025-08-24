@@ -398,3 +398,40 @@ def _can_concat(s, words, i, memo):
 
     memo[i] = False 
     return False 
+
+
+
+
+
+
+#* 77 (7.14)
+''' Given a string and a list of words, 
+    return the minimum number of words needed to 
+    concatenate words in the list together to form the string.  
+    You can use each word as many times as needed. 
+    If it is not possible, return -1. '''
+
+def quickest_concat(s, words):
+    i = 0 
+    memo = {}
+    return _quickest_concat(s, words, i, memo)
+
+def _quickest_concat(s, words, i, memo):
+    if i == len(s):
+        return 0 
+
+    if i in memo:
+        return memo[i]
+
+    min_words = float('inf')
+    for word in words:
+        if s.startswith(word, i):
+            num_words = _quickest_concat(s, words, i + len(word), memo) 
+            if num_words != -1 and num_words < min_words:
+                min_words = num_words 
+
+    if min_words == float('inf'):
+        memo[i] = -1 
+        return memo[i] 
+    memo[i] = min_words + 1
+    return memo[i]
