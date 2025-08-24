@@ -467,3 +467,36 @@ def _can_concat(compound, elements, i, memo):
 
     memo[i] = False 
     return False 
+
+
+
+
+
+#* 79 (7.16)
+''' Given a target compound and a list of elements, 
+    return how many ways the compound can be created by 
+    concatenating elements as many times as needed. '''
+
+def count_compounds(compound, elements):
+    i = 0 
+    memo = {}
+    elements_lower = [ element.lower() for element in elements ]
+    return _count_compounds(compound, elements_lower, i, memo)
+    
+    
+def _count_compounds(compound, elements, i, memo):
+    if i == len(compound):
+        return 1
+
+    if i in memo:
+        return memo[i]
+        
+    count = 0 
+    for element in elements:
+        if compound.startswith(element, i):
+            count += _count_compounds(compound, elements, i + len(element), memo) 
+
+    memo[i] = count 
+    return memo[i] 
+
+
